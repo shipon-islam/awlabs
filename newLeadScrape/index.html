@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Person Report</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Person Report</h1>
+      <p class="sub">Enter details to generate a comprehensive report</p>
+    </header>
+
+    <section class="card">
+      <form id="personForm" novalidate>
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input id="name" name="name" type="text" required placeholder="e.g., Jane Doe" autocomplete="name" />
+          <p class="error" data-error-for="name"></p>
+        </div>
+
+        <div class="field">
+          <label for="companyName">Company Name <span class="req">*</span></label>
+          <input id="companyName" name="companyName" type="text" required placeholder="e.g., Acme Inc."
+            autocomplete="organization" />
+          <p class="error" data-error-for="companyName"></p>
+        </div>
+
+        <div class="field">
+          <label for="linkedinUrl">LinkedIn URL (optional)</label>
+          <input id="linkedinUrl" name="linkedinUrl" type="url" placeholder="https://www.linkedin.com/in/username"
+            inputmode="url" />
+          <p class="hint">Provide if available — we will still proceed without it.</p>
+          <p class="error" data-error-for="linkedinUrl"></p>
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" type="submit" class="btn primary">Submit</button>
+          <button id="resetBtn" type="button" class="btn ghost">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="statusSection" class="card hidden">
+      <div class="row">
+        <div>
+          <h2>Status</h2>
+          <p id="statusText" class="mono">Idle</p>
+          <p id="countdownText" class="dim small"></p>
+        </div>
+        <div class="idbox">
+          <p class="k">Request ID</p>
+          <p id="requestIdText" class="mono">—</p>
+          <button id="copyIdBtn" class="btn xs">Copy</button>
+        </div>
+      </div>
+      <details class="details">
+        <summary>Payload Preview</summary>
+        <pre id="payloadPreview" class="code"></pre>
+      </details>
+      <div class="poll-actions">
+        <button id="checkAgainBtn" class="btn ghost hidden">Check Again</button>
+      </div>
+    </section>
+
+    <!-- <section id="resultSection" class="card hidden">
+      <h2>Result (JSON)</h2>
+      <pre id="resultJson" class="code"></pre>
+    </section> -->
+
+    <section id="resultSection" class="card hidden">
+      <div class="tabs" id="resultTabs">
+        <div class="tab-buttons">
+          <button id="tabPreviewBtn" class="tab-btn active">Preview</button>
+          <button id="tabJsonBtn" class="tab-btn">JSON</button>
+        </div>
+        <div class="tab-actions">
+          <button id="copyPreviewBtn" class="btn xs">Copy Preview</button>
+          <button id="copyJsonBtn" class="btn xs">Copy JSON</button>
+        </div>
+      </div>
+      <div class="tab-panels">
+        <div id="resultPreview" class="preview tab-panel active" aria-labelledby="tabPreviewBtn"></div>
+        <pre id="resultJson" class="code tab-panel" aria-labelledby="tabJsonBtn"></pre>
+      </div>
+    </section>
+
+
+    <section id="resumeBanner" class="banner hidden">
+      <div>
+        <strong>Active request found.</strong>
+        <span>You can resume the previous submission or clear it.</span>
+      </div>
+      <div class="banner-actions">
+        <button id="resumeBtn" class="btn">Resume</button>
+        <button id="clearBtn" class="btn ghost">Clear</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="overlay" class="overlay hidden" aria-live="polite" aria-busy="false">
+    <div class="spinner" role="status" aria-label="Loading"></div>
+    <p class="overlay-text">This might take several minutes…<br><span class="dim">(Phase 1: demo loader, no network
+        calls yet)</span></p>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+
+</html>

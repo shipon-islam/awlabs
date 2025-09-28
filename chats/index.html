@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AWLabs Chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #0b0019;
+      color: #00ff99;
+      font-family: 'Press Start 2P', monospace;
+      padding: 40px;
+    }
+    .dynamic-text::after {
+      content: '_';
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <h1 class="text-2xl mb-6 text-cyan-300">🤖 Chat with AI</h1>
+  <textarea id="chatInput" rows="3" placeholder="Ask me anything..." class="w-full bg-black border border-cyan-500 text-green-200 p-2 text-xs mb-4"></textarea>
+  <button onclick="sendChat()" class="bg-blue-700 text-white px-4 py-2 rounded border border-cyan-400 text-xs">Send</button>
+  <div id="chatOutput" class="mt-6 text-green-300 whitespace-pre-line text-sm"></div>
+
+  <script>
+    async function sendChat() {
+      const input = document.getElementById("chatInput");
+      const output = document.getElementById("chatOutput");
+      const prompt = input.value.trim();
+      if (!prompt) return;
+      output.innerHTML = "Thinking...";
+      input.disabled = true;
+      try {
+        const res = await fetch("chatgpt_handler.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || data.error || "No response";
+        output.innerText = reply;
+      } catch (err) {
+        output.innerText = "Something went wrong.";
+      } finally {
+        input.disabled = false;
+        input.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
