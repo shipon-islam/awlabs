@@ -21,4 +21,9 @@ window.CONFIG = {
   WAIT_BEFORE_POLL_MS: 120000, // wait 2 minutes before starting to poll
   POLL_INTERVAL_MS: 30000,       // every 30s
   TIMEOUT_MS: 360000            // stop at 6 minutes total
+  ,
+  // Batch upload limits: process at most this many leads per CSV. You can change
+  // BATCH_MAX_LEADS_OVERRIDE to a non-zero number to quietly override the cap.
+  BATCH_MAX_LEADS: 15,
+  BATCH_MAX_LEADS_OVERRIDE: 0
 };

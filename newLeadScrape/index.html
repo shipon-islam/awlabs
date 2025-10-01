@@ -15,7 +15,13 @@
       <p class="sub">Enter details to generate a comprehensive report</p>
     </header>
 
-    <section class="card">
+    <!-- Mode selector: choose between single lead search and batch upload -->
+    <div id="modeSelector" class="mode-selector">
+      <button id="modeSingleBtn" type="button" class="mode-btn" aria-pressed="true">Single</button>
+      <button id="modeBatchBtn" type="button" class="mode-btn" aria-pressed="false">Batch</button>
+    </div>
+
+    <section id="singleSection" class="card">
       <form id="personForm" novalidate>
         <div class="field">
           <label for="name">Name <span class="req">*</span></label>
@@ -43,6 +49,28 @@
           <button id="resetBtn" type="button" class="btn ghost">Reset</button>
         </div>
       </form>
+    </section>
+
+    <!-- Batch upload section -->
+    <section id="batchSection" class="card">
+      <h2>Batch Upload</h2>
+      <p>Upload a CSV (comma separated values) file with columns <strong>Name</strong>,
+        <strong>Company</strong>, and <strong>LinkedInUrl</strong>. Only the first N rows
+        (default 15) will be processed.</p>
+      <div class="field">
+        <label for="batchFile">CSV File</label>
+        <input id="batchFile" type="file" accept=".csv" />
+      </div>
+      <div class="actions batch-actions">
+        <button id="batchSampleBtn" type="button" class="btn ghost">Sample CSV</button>
+        <button id="batchStartBtn" type="button" class="btn primary" disabled>Start Batch</button>
+        <button id="batchCancelBtn" type="button" class="btn ghost hidden">Cancel</button>
+        <!-- Reset button to allow uploading a new CSV after a batch completes or is cancelled -->
+        <button id="batchResetBtn" type="button" class="btn ghost hidden">Reset</button>
+        <button id="batchDownloadBtn" type="button" class="btn" disabled>Download Results</button>
+      </div>
+      <!-- Progress log for batch status updates -->
+      <pre id="batchProgress" class="log"></pre>
     </section>
 
     <section id="statusSection" class="card hidden">
