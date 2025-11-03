@@ -55,7 +55,21 @@ if ($curlError) {
 if ($httpCode == 200) {
     $generatedFileName = "uploads/generated_" . uniqid() . ".png";
     file_put_contents($generatedFileName, $response);
-    echo json_encode(["success" => true, "generatedImage" => $generatedFileName]);
+
+    // Detect protocol automatically
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+
+    // Get host and path
+    $host = $_SERVER['HTTP_HOST'];
+    $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+
+    // Full image URL
+    $imageURL = "$protocol://$host$basePath/$generatedFileName";
+
+    echo json_encode([
+        "success" => true,
+        "generatedImage" => $imageURL
+    ]);
 } else {
     $errorData = json_decode($response, true);
     $errorMsg = $errorData['message'] ?? 'Unknown error';

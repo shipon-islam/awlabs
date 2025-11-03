@@ -40,7 +40,7 @@ if (!isset($input["prompt"]) || empty($input["prompt"])) {
 }
 
 // Send to OpenAI API
-$apiKey = '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'; // Replace with your actual key
+$apiKey = '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'; // Replace with your actual key
 $endpoint = 'https://api.openai.com/v1/chat/completions';
 
 $payload = [

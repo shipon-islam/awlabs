@@ -1031,6 +1031,7 @@
         const chatLoadingSpiner = document.getElementById(
           "chat-loadingSpinner"
         );
+
         const prompt = chatInputPrompt.value.trim();
         if (!prompt) return;
         chatInputPrompt.disabled = true;
@@ -1121,7 +1122,7 @@
         if (!imgURL) {
           return null;
         }
-        resultUplaodImage.src = "/" + imgURL;
+        resultUplaodImage.src = imgURL;
         generatedLayout(true);
         const li = document.createElement("li");
         li.textContent = prompt;
@@ -1246,13 +1247,16 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt }),
           });
+
           if (response.status === 429) {
             const result = await response.json();
+
             alert(result.error);
             throw new Error(result.error);
           }
           if (!response.ok) throw new Error("Failed to generate image");
           const result = await response.json();
+          console.log(result);
           const imgURL = result.url;
           resultImage.src = imgURL;
           document.getElementById("generated-label").classList.remove("hidden");
