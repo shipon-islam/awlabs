@@ -107,13 +107,13 @@ $filename = uniqid("awlabs_ai_") . ".png";
 $filepath = "$folder/$filename";
 file_put_contents($filepath, $response);
 
-// Return image URL
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-$host = $_SERVER['HTTP_HOST'];
-$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-$imageURL = "$protocol://$host$basePath/$filepath";
+// // Return image URL
+// $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+// $host = $_SERVER['HTTP_HOST'];
+// $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+// $imageURL = "$protocol://$host$basePath/$filepath";
 
-// $imageURL = "https://www.awlabs.online/$filepath";
+$imageURL = "https://www.awlabs.online/$filepath";
 header('Content-Type: application/json');
 echo json_encode(["url" => $imageURL]);
 ?>
