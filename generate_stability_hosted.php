@@ -1,9 +1,6 @@
 <?php
-// CORS Headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
 
+header('Content-Type: application/json');
 // Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -114,6 +111,5 @@ file_put_contents($filepath, $response);
 // $imageURL = "$protocol://$host$basePath/$filepath";
 
 $imageURL = "https://www.awlabs.online/$filepath";
-header('Content-Type: application/json');
 echo json_encode(["url" => $imageURL]);
 ?>
