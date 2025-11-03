@@ -1,1 +1,1 @@
-{"errors":["Your request was flagged by our content moderation system, as a result your request was denied and you were not charged."],"id":"7581975d4c1728a1a66a7746005f2747","name":"content_moderation"}
+{"errors":["authorization: invalid or missing header value"],"id":"c63772a3793eddfc1be09e0cdc6779fc","name":"unauthorized"}

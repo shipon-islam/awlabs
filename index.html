@@ -1247,10 +1247,9 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt }),
           });
-
+          console.log(response);
           if (response.status === 429) {
             const result = await response.json();
-
             alert(result.error);
             throw new Error(result.error);
           }
