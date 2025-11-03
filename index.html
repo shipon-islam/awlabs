@@ -1287,7 +1287,7 @@
             "share-linkedin"
           ).href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedURL}`;
         } catch (err) {
-          console.error("Error:", err);
+          console.log(err);
           alert("Something went wrong. Try again!");
         } finally {
           button.innerText = "GENERATE IMAGE";
