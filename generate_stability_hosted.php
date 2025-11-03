@@ -1,11 +1,16 @@
 <?php
+// comment below all the code for error
 
-header('Content-Type: application/json');
-// Enable error reporting
+// CORS Headers
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: POST, OPTIONS");
+// header("Access-Control-Allow-Headers: Content-Type");
+
+// // Enable error reporting
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
-
+header('Content-Type: application/json');
 // Handle prompt input
 $input = json_decode(file_get_contents("php://input"), true);
 if (!isset($input['prompt']) || empty($input['prompt'])) {
@@ -104,12 +109,13 @@ $filename = uniqid("awlabs_ai_") . ".png";
 $filepath = "$folder/$filename";
 file_put_contents($filepath, $response);
 
-// // Return image URL
-// $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-// $host = $_SERVER['HTTP_HOST'];
-// $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-// $imageURL = "$protocol://$host$basePath/$filepath";
+// Return image URL
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'];
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+$imageURL = "$protocol://$host$basePath/$filepath";
 
-$imageURL = "https://www.awlabs.online/$filepath";
+// $imageURL = "https://www.awlabs.online/$filepath";
+
 echo json_encode(["url" => $imageURL]);
 ?>
